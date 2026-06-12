@@ -1,0 +1,31 @@
+using UnityEngine;
+
+public class CollectibleScript : MonoBehaviour
+{
+    // manually able to set score value
+    public int score = 1;
+    AudioSource collectibleAudio;
+
+    void Start()
+    {
+        // get the audio given to the ob
+        collectibleAudio = GetComponent<AudioSource>();
+    }
+
+    public void Collect()
+    {
+        if(collectibleAudio != null)
+        {
+            collectibleAudio.Play();
+            // destroy game object parent after playing audio
+            Destroy(gameObject.transform.parent.gameObject, collectibleAudio.clip.length);
+        }
+        
+        else
+        {
+            // um if there is no audio its okay just destroy it
+            Destroy(gameObject.transform.parent.gameObject);
+        }
+    }
+
+}

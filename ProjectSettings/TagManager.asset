@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - spinningfood
+  - blockedfood
   layers:
   - Default
   - TransparentFX
