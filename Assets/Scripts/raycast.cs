@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class raycast : MonoBehaviour
 {
+    // get my player script
+    [SerializeField] private PlayerScript player;
 
     [Header("Raycast Features")]
     [SerializeField] private float rayLength = 5;
@@ -38,9 +40,16 @@ public class raycast : MonoBehaviour
                     _noteController.ShowNote();
                 }
                 }
-                
 
             }
+
+            /* highlight crosshair if its on a collectible
+            else if (player.currentCollectible != null)
+            {
+                HighlightCrosshair(true);
+            }
+            */
+            
             else
             {
                 // Clear Readable Item
@@ -53,7 +62,6 @@ public class raycast : MonoBehaviour
             // Clear Readable Item
             ClearNote();
         }
-
         
     }
 
@@ -61,16 +69,17 @@ public class raycast : MonoBehaviour
     {
         if(_noteController != null)
         {
-            // Disable crosshair 
+            // Disable crosshair
             HighlightCrosshair(false);
             _noteController = null;
+            
+           
         }
-        
         
     }
 
-    // highlight crosshair when looking at note
-    void HighlightCrosshair(bool on)
+    // highlight crosshair when looking at stuff
+    public void HighlightCrosshair(bool on)
     {
         if (on)
         {

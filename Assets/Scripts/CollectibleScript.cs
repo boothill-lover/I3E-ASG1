@@ -1,7 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class CollectibleScript : MonoBehaviour
 {
+    // get crosshair img
+    [SerializeField] private Image crosshair;
+
     // manually able to set score value
     public int score = 1;
     AudioSource collectibleAudio;
@@ -19,12 +24,14 @@ public class CollectibleScript : MonoBehaviour
             collectibleAudio.Play();
             // destroy game object parent after playing audio
             Destroy(gameObject.transform.parent.gameObject, collectibleAudio.clip.length);
+            crosshair.color = Color.white;
         }
         
         else
         {
             // um if there is no audio its okay just destroy it
             Destroy(gameObject.transform.parent.gameObject);
+            crosshair.color = Color.white;
         }
     }
 

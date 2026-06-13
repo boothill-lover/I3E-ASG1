@@ -1,9 +1,17 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
 
 public class PlayerScript : MonoBehaviour
 {
-    GameObject currentCollectible;
+    [SerializeField] private Image crosshair;
+    public GameObject currentCollectible;
     AudioSource collectibleAudio;
+
+    // to update UI
+    public static int a1amount = 0;
+    [SerializeField] private TMP_Text collected;
 
     void Start()
     {
@@ -14,6 +22,8 @@ public class PlayerScript : MonoBehaviour
         if(other.gameObject.tag == "spinningfood")
         {
             currentCollectible = other.gameObject;
+            crosshair.color = Color.red;
+
         }
 
        /* 
@@ -39,6 +49,11 @@ public class PlayerScript : MonoBehaviour
                 print("Collected: " + collectible.score + "points. Total Score: " + GameManager.totalScore);
                 collectible.Collect();
 
+                a1amount += 1;
+
+                // update the ui
+                collected.text = "Area 1\nCollected: " + a1amount + "/6";
+
                 // reset the currentcollectible aft collecting
                 currentCollectible = null;
             }
@@ -51,6 +66,7 @@ public class PlayerScript : MonoBehaviour
         {
             // collectible out of range
             currentCollectible = null;
+            crosshair.color = Color.white;
         }
     }
 }
