@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 /*
 * Author: Carolyn
-* Date: 
-* Description:
+* Date: 12/07/26
+* Description: Script for my Player, contains what to do if the player interacts with objects.
 */
 
 
@@ -16,12 +16,20 @@ public class PlayerScript : MonoBehaviour
     // get the hint for hammer
     [SerializeField] private GameObject hintPanel;
 
+    // my two jarred foods
+    [SerializeField] private GameObject cheese;
+    [SerializeField] private GameObject frappe;
+
     // get the crosshair to highlight when nearby interactable items
     [SerializeField] private Image crosshair;
     // get the ui script
     [SerializeField] private CollectedScript collectedScript;
     public GameObject currentCollectible;
     AudioSource collectibleAudio;
+
+    // timer for my ui to disappear
+    private float hideTimer;
+
 
     void Start()
     {
@@ -40,6 +48,7 @@ public class PlayerScript : MonoBehaviour
         if(other.gameObject.tag == "blockedfood")
         {
             crosshair.color = Color.yellow;
+            currentCollectible = other.gameObject;
         }
 
        /* 
@@ -52,6 +61,14 @@ public class PlayerScript : MonoBehaviour
         }
         */
     }
+
+    // show hint for a bit
+    public void ShowHint()
+    {
+        hintPanel.SetActive(true);
+        hideTimer = 3f;
+    }
+
 
     public void OnInteract()
     {
@@ -77,7 +94,31 @@ public class PlayerScript : MonoBehaviour
         // if looking at a blocked food
         if(crosshair.color == Color.yellow)
         {
-            hintPanel.SetActive(true);
+            // checks parent name of the jar
+            Transform root = currentCollectible.transform.root;
+            // if u have hammer, break the jar.
+            if(hasHammer)
+            {
+                if (root.name == "A1_jar_cheese")
+                {
+                    cheese.tag = "spinningfood";
+                }
+                else if (root.name == "A1_jar_frappe")
+                {
+                    frappe.tag = "spinningfood";
+                }
+
+                // then destroy jar
+                Destroy(currentCollectible);
+                crosshair.color = Color.red;
+            }
+            
+            // if not, show hint that you need one
+            else
+            {
+                ShowHint();
+            }
+            
         }
     }
 
@@ -90,4 +131,20 @@ public class PlayerScript : MonoBehaviour
             crosshair.color = Color.white;
         }
     }
+
+    // resets the timer, i tried coroutine and it wasn't working.
+    void Update()
+    {
+        if (hideTimer > 0f)
+        {
+            hideTimer -= Time.deltaTime;
+
+            if (hideTimer <= 0f)
+            {
+                hintPanel.SetActive(false);
+            }
+        }
+
+    }
+
 }

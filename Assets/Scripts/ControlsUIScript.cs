@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+* Author: Carolyn
+* Date: 13/07/26
+* Description: Short tutorial pop up to disappear once you leave the starting room
+*/
+
 public class ControlsUIScript : MonoBehaviour
 {
     [SerializeField] private GameObject ControlsCanvas;

@@ -2,6 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+/*
+* Author: Carolyn
+* Date: 12/07/26
+* Description: Script for the raycast on my player
+*/
+
 public class raycast : MonoBehaviour
 {
     // get my player script
@@ -42,13 +48,6 @@ public class raycast : MonoBehaviour
                 }
 
             }
-
-            /* highlight crosshair if its on a collectible
-            else if (player.currentCollectible != null)
-            {
-                HighlightCrosshair(true);
-            }
-            */
             
             else
             {
@@ -69,11 +68,10 @@ public class raycast : MonoBehaviour
     {
         if(_noteController != null)
         {
-            // Disable crosshair
+            
             HighlightCrosshair(false);
             _noteController = null;
             
-           
         }
         
     }

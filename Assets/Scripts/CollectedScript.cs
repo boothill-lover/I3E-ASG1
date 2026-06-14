@@ -1,12 +1,19 @@
 using UnityEngine;
 using TMPro;
 
+/*
+* Author: Carolyn
+* Date: 13/07/26
+* Description: Script for the UI that indicates what area I'm in and how much I've collected in said area.
+*/
+
+
 public class CollectedScript : MonoBehaviour
 {
     // get collectibles
     [SerializeField] private PlayerScript player;
 
-    public static int a1amount, a2amount = 0;
+    public static int a1amount, a2amount, s1amount = 0;
 
     // defines what area im currently in
     public int currentArea = 0;
@@ -26,6 +33,12 @@ public class CollectedScript : MonoBehaviour
         a1amount++;
         collected.text = "Area 1\nCollected: " + a1amount + "/6";
     }
+
+    else if (areaID == 99)
+        {
+            s1amount++;
+            collected.text = "Secret Area\nCollected: " + s1amount + "/2";
+        }
 }
 
 // for changing area in the area triggers scripts
@@ -53,6 +66,10 @@ public void UpdateUI()
             else if (currentArea == 2)
             {
                 collected.text = "Area 2\nCollected: " + a2amount + "/5";
+            }
+            else if (currentArea == 99)
+            {
+                collected.text = "Secret Area\nCollected: " + s1amount + "/2";
             }
 
         }

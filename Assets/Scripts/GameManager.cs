@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+* Author: Carolyn
+* Date: 12/07/26
+* Description: Store the scores
+*/
+
+
 public class GameManager : MonoBehaviour
 {
 

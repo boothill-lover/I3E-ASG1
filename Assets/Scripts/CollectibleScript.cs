@@ -1,6 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+* Author: Carolyn
+* Date: 12/07/26
+* Description: For my collectibles like food, stores what to do with the food when you interact with it
+*/
+
 public class CollectibleScript : MonoBehaviour
 {
     // get crosshair img

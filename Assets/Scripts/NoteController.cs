@@ -3,6 +3,12 @@ using TMPro;
 using UnityEngine.Events;
 using StarterAssets;
 
+/*
+* Author: Carolyn
+* Date: 12/07/26
+* Description: Controls what happens with my notebook (salmon) 
+*/
+
 public class NoteController : MonoBehaviour
 {
     [Header("Input")]
