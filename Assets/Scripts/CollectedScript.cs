@@ -13,13 +13,20 @@ public class CollectedScript : MonoBehaviour
     // get collectibles
     [SerializeField] private PlayerScript player;
 
-    public static int a1amount, a2amount, s1amount = 0;
+    public static int a1amount, a2amount, s1amount, a3amount = 0;
 
     // defines what area im currently in
     public int currentArea = 0;
     // collect ui
     [SerializeField] private TMP_Text collected;
     [SerializeField] private GameObject collectUI;
+
+    // adding a total food count
+    public static int totalCollected = 0;
+    public int targetCollected = 10;
+    private bool allCollectedTriggered = false;
+    [SerializeField] private GameObject hintPanel;
+    [SerializeField] private TMP_Text hintText;
     void Start()
     {
         currentArea = 0;
@@ -30,21 +37,33 @@ public class CollectedScript : MonoBehaviour
 {
     if (areaID == 1)
     {
+        totalCollected++;
         a1amount++;
         collected.text = "Area 1\nCollected: " + a1amount + "/6";
     }
 
     else if (areaID == 99)
         {
+            totalCollected++;
             s1amount++;
             collected.text = "Secret Area\nCollected: " + s1amount + "/2";
         }
 
     else if (areaID == 2)
         {
+            totalCollected++;
             a2amount++;
-            collected.text = "Area 2\nCollected: " + a1amount + "/1";
+            collected.text = "Area 2\nCollected: " + a2amount + "/1";
         }
+
+    else if (areaID == 3)
+        {
+            totalCollected++;
+            a3amount++;
+            collected.text = "Area 3\nCollected: " + a3amount + "/1";
+        }
+
+    CheckAllCollected();
 }
 
 // for changing area in the area triggers scripts
@@ -77,8 +96,26 @@ public void UpdateUI()
             {
                 collected.text = "Secret Area\nCollected: " + s1amount + "/2";
             }
+            else if (currentArea == 3)
+            {
+                collected.text = "Area 3\nCollected: " + a3amount + "/1";
+            }
 
         }
 }
 
+    // for checking whether ive collected all 10 foods
+    void CheckAllCollected()
+    {
+        if (allCollectedTriggered) return;
+
+        if (totalCollected >= targetCollected)
+        {
+            allCollectedTriggered = true;
+
+            hintPanel.SetActive(true);
+
+            hintText.text = "Congratulations on getting all 10 foods!";
+        }
+    }
 }

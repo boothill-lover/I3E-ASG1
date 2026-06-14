@@ -26,6 +26,5 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        print("Total possible score: " + totalPossibleScore);
     }
 }

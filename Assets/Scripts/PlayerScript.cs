@@ -34,6 +34,9 @@ public class PlayerScript : MonoBehaviour
       GameObject currentDoor;
     doorscript currentDoorScript;
 
+    // hint text
+    [SerializeField] private TMP_Text hintText;
+
 
     void Start()
     {
@@ -55,6 +58,11 @@ public class PlayerScript : MonoBehaviour
             currentCollectible = other.gameObject;
         }
 
+        if(other.gameObject.tag == "hammer")
+        {
+            crosshair.color = Color.cyan;
+            currentCollectible = other.gameObject;
+        }
        
         doorscript door = other.GetComponentInParent<doorscript>();
 
@@ -69,6 +77,15 @@ public class PlayerScript : MonoBehaviour
     // show hint for a bit
     public void ShowHint()
     {
+        if(hasHammer == false)
+        {
+                hintText.text = "Maybe something can break this jar...";
+        }
+
+        else
+        {
+            hintText.text = "You can now break jars! Yay";
+        }
         hintPanel.SetActive(true);
         hideTimer = 3f;
     }
@@ -80,6 +97,18 @@ public class PlayerScript : MonoBehaviour
         if(currentCollectible != null)
         {
             CollectibleScript collectible = currentCollectible.GetComponent<CollectibleScript>();
+
+            // check for hammer
+            if (currentCollectible.CompareTag("hammer"))
+            {
+                hasHammer = true;
+
+                ShowHint();
+
+                collectible.Collect();
+                currentCollectible = null;
+                return;
+            }
 
             if (collectible != null)
             {
