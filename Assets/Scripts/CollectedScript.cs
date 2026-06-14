@@ -39,6 +39,12 @@ public class CollectedScript : MonoBehaviour
             s1amount++;
             collected.text = "Secret Area\nCollected: " + s1amount + "/2";
         }
+
+    else if (areaID == 2)
+        {
+            a2amount++;
+            collected.text = "Area 2\nCollected: " + a1amount + "/1";
+        }
 }
 
 // for changing area in the area triggers scripts
@@ -65,7 +71,7 @@ public void UpdateUI()
             }
             else if (currentArea == 2)
             {
-                collected.text = "Area 2\nCollected: " + a2amount + "/5";
+                collected.text = "Area 2\nCollected: " + a2amount + "/1";
             }
             else if (currentArea == 99)
             {

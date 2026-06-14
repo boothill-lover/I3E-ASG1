@@ -1,14 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
+/*
+* Author: Carolyn
+* Date: 12/07/26
+* Description: Script for my stinky cube hazards that are dmg over time
+*/
+
 public class stinkyCube : MonoBehaviour
 {
     // let one running at one time, not alot of coroutines
     private bool damaging = false;
     
-    // when i die
-    public Transform respawnPoint;
-
     private void OnTriggerEnter(Collider other)
     {
         // if player is touching the stinky cube
