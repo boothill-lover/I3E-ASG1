@@ -30,6 +30,10 @@ public class PlayerScript : MonoBehaviour
     // timer for my ui to disappear
     private float hideTimer;
 
+    // door interaction
+      GameObject currentDoor;
+    doorscript currentDoorScript;
+
 
     void Start()
     {
@@ -51,15 +55,15 @@ public class PlayerScript : MonoBehaviour
             currentCollectible = other.gameObject;
         }
 
-       /* 
-        Door door = other.GetComponentInParent<Door>();
+       
+        doorscript door = other.GetComponentInParent<doorscript>();
 
         if(door != null)
         {
             currentDoor = other.gameObject;
             currentDoorScript = door;
         }
-        */
+        
     }
 
     // show hint for a bit
@@ -120,7 +124,12 @@ public class PlayerScript : MonoBehaviour
             }
             
         }
-    }
+
+        if(currentDoorScript != null)
+            {
+                currentDoorScript.Interact();
+            }
+    } // onInteract()
 
     void OnTriggerExit(Collider other)
     {
@@ -129,6 +138,13 @@ public class PlayerScript : MonoBehaviour
             // collectible out of range
             currentCollectible = null;
             crosshair.color = Color.white;
+        }
+
+         if(other.gameObject == currentDoor)
+        {
+            // door out of range
+            currentDoor = null;
+            currentDoorScript = null;
         }
     }
 
