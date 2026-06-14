@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class CollectibleScript : MonoBehaviour
 {
     // get crosshair img
@@ -9,6 +8,8 @@ public class CollectibleScript : MonoBehaviour
 
     // manually able to set score value
     public int score = 1;
+    // manually able to set which area this food is from
+    public int areaID;
     AudioSource collectibleAudio;
 
     void Start()
